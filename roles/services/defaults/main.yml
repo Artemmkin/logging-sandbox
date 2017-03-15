@@ -1,0 +1,4 @@
+---
+# defaults file for services
+
+install_services: []         # A list of services to install

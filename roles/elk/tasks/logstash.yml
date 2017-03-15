@@ -1,0 +1,24 @@
+---
+
+- name: install logstash
+  apt:
+    name: logstash
+    state: present
+
+- name: Make sure that a logstash user exists
+  user: name=logstash system=yes groups=adm
+
+- name: Configure logstash
+  template:
+    src: templates/{{item}}.j2
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    group: root
+    owner: root
+  notify: restart logstash
+  with_items:
+    - 02-beats.conf
+    - 10-local-syslog.conf
+    - 30-output.conf
+
+- name: Start and enable logstash
+  service: name=logstash state=started enabled=yes

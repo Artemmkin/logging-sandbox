@@ -1,0 +1,24 @@
+---
+
+- name: Install nginx
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nginx
+    - python-passlib
+
+- name: Add a user to a password file
+  htpasswd:
+    path: /etc/nginx/{{ basic_auth_file_name }}
+    name: "{{ username }}"
+    password: "{{ password }}"
+    owner: root
+    group: www-data
+    mode: 0640
+
+- name: Configure nginx
+  template:
+    src: nginx_default.j2
+    dest: /etc/nginx/sites-available/default
+  notify: restart nginx

@@ -1,0 +1,25 @@
+---
+
+- name: Add repository for JDK8 on Ubuntu 14.04
+  apt_repository:
+    repo: 'ppa:openjdk-r/ppa'
+    state: present
+
+- name: Add repository for elastic stack tools
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/5.x/apt stable main
+    state: present
+
+- name: Add the key
+  apt_key:
+    url: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: update cache
+  apt:
+    update_cache: yes
+
+- name: Install the JRE
+  apt:
+    name: openjdk-8-jre
+    state: latest

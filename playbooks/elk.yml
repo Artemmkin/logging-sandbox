@@ -1,0 +1,8 @@
+---
+
+- hosts: elk
+  gather_facts: false
+  become: yes
+
+  roles:
+    - elk

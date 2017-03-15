@@ -1,0 +1,6 @@
+---
+# defaults file for elk
+basic_auth_file_name: htpasswd.users
+
+username: admin
+password: 'changeMe88'

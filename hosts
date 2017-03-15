@@ -1,0 +1,5 @@
+[hosts]
+
+elk ansible_host= ansible_user=ubuntu
+
+log-generator ansible_host= ansible_user=ubuntu

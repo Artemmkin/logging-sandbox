@@ -1,0 +1,4 @@
+---
+
+- include: playbooks/elk.yml
+- include: playbooks/log-generator.yml

@@ -1,0 +1,7 @@
+---
+# tasks file for services
+
+- include: "{{ role_path }}/tasks/apache2.yml"
+  when: "'apache2' in install_services"
+- include: "{{ role_path }}/tasks/nginx.yml"
+  when: "'nginx' in install_services"

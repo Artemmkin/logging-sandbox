@@ -1,0 +1,9 @@
+---
+# tasks file for elk
+
+
+- include: "{{ role_path }}/tasks/common.yml"
+- include: "{{ role_path }}/tasks/es.yml"
+- include: "{{ role_path }}/tasks/logstash.yml"
+- include: "{{ role_path }}/tasks/kibana.yml"
+- include: "{{ role_path }}/tasks/nginx.yml"

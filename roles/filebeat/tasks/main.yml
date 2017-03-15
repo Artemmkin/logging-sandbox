@@ -1,0 +1,37 @@
+---
+# tasks file for filebeat
+
+- name: Add repository for
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/5.x/apt stable main
+    state: present
+
+- name: Add the key
+  apt_key:
+    url: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: update cache
+  apt:
+    update_cache: yes
+
+- name: Install filebeat
+  apt:
+    name: filebeat
+    state: present
+
+- name: Upload the index template to ES
+  command: "curl -XPUT 'http://{{ es_host }}:9200/_template/filebeat' -d@/etc/filebeat/filebeat.template.json"
+
+
+- name: Create configuration file
+  template:
+    src: templates/filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    owner: root
+    group: root
+  notify:
+    - restart filebeat
+
+- name: Start and enable filebeat
+  service: name=filebeat state=started enabled=yes

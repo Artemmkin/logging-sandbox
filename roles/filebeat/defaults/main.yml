@@ -1,0 +1,7 @@
+---
+# defaults file for filebeat
+
+logstash_host:  # change to the IP address of a host to which we need to send log data
+es_host: "{{ logstash_host }}"
+
+beats_port: 5044

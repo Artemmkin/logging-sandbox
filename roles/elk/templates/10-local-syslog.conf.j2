@@ -1,0 +1,6 @@
+input {
+  file {
+    type => "local-syslog"
+    path => [ "/var/log/syslog", "/var/log/*.log" ]
+  }
+}

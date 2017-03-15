@@ -1,0 +1,18 @@
+name: "test-shipper" # if  empty, the hostname is used
+tags: ["web-tier"]  # make it easy to group servers, all published events by this host will have this tag
+
+filebeat.prospectors:
+- paths:
+    - /var/log/apache2/access.log
+  fields: # Add additional info to the output
+    apache: true
+  tags: ["web"] # A list of tags that the Beat includes in the tags field of each published event. Make it easy to select specific events
+#  exclude_lines: ['HTTP']  #  drop any lines that contain with "HTTP".
+- paths:
+    - /var/log/*.log
+    - /var/log/syslog
+  scan_frequency: 2 #  how often the prospector checks for new files in the specified paths
+  document_type: syslog # For Elasticsearch output, the value that you specify here is used to set the type field in the output document. Default is log 
+
+output.logstash:
+  hosts: ["{{ logstash_host }}:{{ beats_port }}"]

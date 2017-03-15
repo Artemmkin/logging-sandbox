@@ -1,0 +1,17 @@
+---
+
+- name: install elasticsearch
+  apt:
+    name: elasticsearch
+    state: present
+
+- name: Change bind address
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    regexp: "^(#)?network.host"
+    line: "network.host: 0.0.0.0"
+  notify:
+    - restart elasticsearch
+
+- name: Start and enable elasticsearch
+  service: name=elasticsearch state=started enabled=yes

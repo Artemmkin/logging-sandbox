@@ -1,0 +1,9 @@
+---
+
+- name: install kibana
+  apt:
+    name: kibana
+    state: present
+
+- name: Start and enable kibana
+  service: name=kibana state=started enabled=yes

@@ -1,0 +1,18 @@
+---
+
+- hosts: log-generator
+  gather_facts: false
+  become: yes
+
+  vars:
+    install_services:
+      - apache2 # uncomment a service to install
+      # - nginx
+
+  roles:
+    - services
+  # shippers
+    - filebeat # uncomment a shipper to install
+    # - rsyslog
+    # - syslog-ng
+    # - fluentd
