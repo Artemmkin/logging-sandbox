@@ -1,4 +1,5 @@
-_These roles assumes that you run ubuntu14.04. I used AWS for my tests_
+_These roles assume that you run ubuntu14.04. I used AWS for my tests_
+
 
 ### How to use these roles?
 
